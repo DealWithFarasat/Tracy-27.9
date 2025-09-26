@@ -317,10 +317,11 @@ body {
   bottom: 0;
   width: 100%;
   height: 5rem;
-  /* Darker brown for dark theme */
-  background-color: #78350f;
+  /* Enhanced cake base with gradient and better shadows */
+  background: linear-gradient(135deg, #92400e 0%, #78350f 50%, #451a03 100%);
   border-radius: 0.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  border: 2px solid #a16207;
 }
 
 .cake-frosting {
@@ -328,23 +329,47 @@ body {
   bottom: 4rem;
   width: 100%;
   height: 3rem;
-  /* Darker frosting for dark theme */
-  background-color: #be185d;
+  /* Enhanced frosting with gradient and decorative elements */
+  background: linear-gradient(135deg, #ec4899 0%, #be185d 50%, #9d174d 100%);
   border-radius: 0.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  border: 2px solid #f472b6;
 }
 
-/* Added styling for age number on cake */
+/* Enhanced frosting with decorative wavy edge */
+.cake-frosting::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 16px;
+  background: linear-gradient(135deg, #ec4899 0%, #be185d 50%, #9d174d 100%);
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 .cake-age {
   position: absolute;
   bottom: 5rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #fbbf24;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 10px #fbbf24, 2px 2px 4px rgba(0, 0, 0, 0.8);
   z-index: 10;
+  animation: ageGlow 2s ease-in-out infinite alternate;
+}
+
+/* Added glowing animation for age number */
+@keyframes ageGlow {
+  0% {
+    text-shadow: 0 0 10px #fbbf24, 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 20px #fbbf24, 0 0 30px #f59e0b, 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
 }
 
 .candles {
@@ -360,13 +385,16 @@ body {
   position: relative;
 }
 
+/* Enhanced candle sticks with gradient */
 .candle-stick {
   width: 0.25rem;
   height: 2rem;
-  background-color: #fbbf24;
+  background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
   border-radius: 9999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Enhanced flame with better colors and animation */
 .flame {
   position: absolute;
   top: -0.5rem;
@@ -374,17 +402,20 @@ body {
   transform: translateX(-50%);
   width: 0.5rem;
   height: 0.75rem;
-  background-color: #fb923c;
+  background: radial-gradient(circle, #fbbf24 0%, #fb923c 50%, #dc2626 100%);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   animation: flicker 1s ease-in-out infinite alternate;
+  box-shadow: 0 0 8px #fb923c, 0 0 12px rgba(251, 146, 60, 0.5);
 }
 
 @keyframes flicker {
   0% {
-    transform: translateX(-50%) scale(1) rotate(-1deg);
+    transform: translateX(-50%) scale(1) rotate(-2deg);
+    box-shadow: 0 0 8px #fb923c, 0 0 12px rgba(251, 146, 60, 0.5);
   }
   100% {
-    transform: translateX(-50%) scale(1.1) rotate(1deg);
+    transform: translateX(-50%) scale(1.15) rotate(2deg);
+    box-shadow: 0 0 12px #fb923c, 0 0 18px rgba(251, 146, 60, 0.7);
   }
 }
 
@@ -393,25 +424,44 @@ body {
   width: 0.75rem;
   height: 0.75rem;
   border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
 .cake-decoration.left {
   bottom: 5rem;
   left: 1rem;
-  background-color: #ef4444;
+  background: radial-gradient(circle, #f87171 0%, #ef4444 100%);
+  animation: decorationPulse 2s ease-in-out infinite;
+  transform-origin: center;
 }
 
 .cake-decoration.right {
   bottom: 5rem;
   right: 1rem;
-  background-color: #3b82f6;
+  background: radial-gradient(circle, #60a5fa 0%, #3b82f6 100%);
+  animation: decorationPulse 2s ease-in-out infinite 0.5s;
+  transform-origin: center;
 }
 
 .cake-decoration.center {
   bottom: 6rem;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #10b981;
+  background: radial-gradient(circle, #34d399 0%, #10b981 100%);
+  animation: decorationPulse 2s ease-in-out infinite 1s;
+}
+
+/* Added pulsing animation for decorations */
+@keyframes decorationPulse {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 255, 255, 0.4);
+  }
 }
 
 /* Message section */
@@ -475,60 +525,6 @@ body {
   /* Light gray for dark theme */
   color: #d1d5db;
   font-size: 0.875rem;
-}
-
-/* Music section */
-.music-section {
-  text-align: center;
-}
-
-.music-card {
-  max-width: 24rem;
-  margin: 0 auto;
-  padding: 1.5rem;
-  /* Dark background for music card */
-  background: rgba(55, 65, 81, 0.3);
-  /* Light border for dark theme */
-  border: 2px dashed #6b7280;
-  border-radius: 0.5rem;
-}
-
-.music-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.music-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  /* Light text for dark theme */
-  color: #f3f4f6;
-}
-
-.music-description {
-  font-size: 0.875rem;
-  /* Light gray for dark theme */
-  color: #d1d5db;
-  margin-bottom: 1rem;
-}
-
-.music-button {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  /* Light border for dark theme */
-  border: 1px solid #6b7280;
-  border-radius: 0.375rem;
-  /* Light text for dark theme */
-  color: #e5e7eb;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.music-button:hover {
-  /* Dark hover background */
-  background: #374151;
 }
 
 /* Footer */
