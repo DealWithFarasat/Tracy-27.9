@@ -1,0 +1,591 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Changed to dark theme background */
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Added light text color for dark theme */
+  color: #e5e7eb;
+}
+
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Sparkles */
+#sparkles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 24px;
+  animation: sparkleFloat 2s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes sparkleFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50px) rotate(180deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) rotate(360deg) scale(0);
+  }
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+.main-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: bold;
+  /* Changed to bright pink for dark theme */
+  color: #f472b6;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: titleBounce 2s ease-out;
+}
+
+.subtitle {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  /* Changed to light gray for dark theme */
+  color: #d1d5db;
+  font-family: serif;
+}
+
+@keyframes titleBounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Main content */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 4rem;
+}
+
+/* Gifts section */
+.gifts-section {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  /* Changed to light color for dark theme */
+  color: #f3f4f6;
+}
+
+.gifts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .gifts-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gift-container {
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  animation: giftAppear 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.gift-container:nth-child(1) {
+  animation-delay: 0s;
+}
+.gift-container:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.gift-container:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.gift-container:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes giftAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gift-container:hover {
+  transform: scale(1.05);
+}
+
+.gift-card {
+  position: relative;
+  height: 8rem;
+  border-radius: 0.5rem;
+  border: 2px solid white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .gift-card {
+    height: 10rem;
+  }
+}
+
+.gift-card.pink {
+  /* Darker pink for dark theme */
+  background-color: #be185d;
+}
+.gift-card.blue {
+  /* Darker blue for dark theme */
+  background-color: #1e40af;
+}
+.gift-card.yellow {
+  /* Darker yellow for dark theme */
+  background-color: #ca8a04;
+}
+.gift-card.green {
+  /* Darker green for dark theme */
+  background-color: #059669;
+}
+
+.gift-lid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 4px solid white;
+  transition: transform 0.6s ease;
+  transform-origin: top;
+}
+
+.gift-card.pink .gift-lid {
+  /* Darker pink for dark theme */
+  background-color: #be185d;
+}
+.gift-card.blue .gift-lid {
+  /* Darker blue for dark theme */
+  background-color: #1e40af;
+}
+.gift-card.yellow .gift-lid {
+  /* Darker yellow for dark theme */
+  background-color: #ca8a04;
+}
+.gift-card.green .gift-lid {
+  /* Darker green for dark theme */
+  background-color: #059669;
+}
+
+.gift-icon {
+  width: 2rem;
+  height: 2rem;
+  color: white;
+  stroke-width: 2;
+}
+
+.gift-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Dark background for gift content */
+  background: #1f2937;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.gift-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.gift-message {
+  font-size: 0.75rem;
+  text-align: center;
+  font-weight: 500;
+  /* Light text for dark theme */
+  color: #e5e7eb;
+  line-height: 1.2;
+}
+
+.gift-container.opened .gift-lid {
+  transform: rotateX(-180deg);
+}
+
+/* Cake section */
+.cake-section {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+.cake-section.hidden {
+  display: none;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cake-container {
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.cake {
+  position: relative;
+  width: 12rem;
+  height: 8rem;
+  margin: 0 auto 2rem;
+}
+
+.cake-base {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 5rem;
+  /* Darker brown for dark theme */
+  background-color: #78350f;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.cake-frosting {
+  position: absolute;
+  bottom: 4rem;
+  width: 100%;
+  height: 3rem;
+  /* Darker frosting for dark theme */
+  background-color: #be185d;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Added styling for age number on cake */
+.cake-age {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fbbf24;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.candles {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.candle {
+  position: relative;
+}
+
+.candle-stick {
+  width: 0.25rem;
+  height: 2rem;
+  background-color: #fbbf24;
+  border-radius: 9999px;
+}
+
+.flame {
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.5rem;
+  height: 0.75rem;
+  background-color: #fb923c;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flicker 1s ease-in-out infinite alternate;
+}
+
+@keyframes flicker {
+  0% {
+    transform: translateX(-50%) scale(1) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(-50%) scale(1.1) rotate(1deg);
+  }
+}
+
+.cake-decoration {
+  position: absolute;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}
+
+.cake-decoration.left {
+  bottom: 5rem;
+  left: 1rem;
+  background-color: #ef4444;
+}
+
+.cake-decoration.right {
+  bottom: 5rem;
+  right: 1rem;
+  background-color: #3b82f6;
+}
+
+.cake-decoration.center {
+  bottom: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #10b981;
+}
+
+/* Message section */
+.message-section {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInUp 1s ease-out 1s both;
+}
+
+.message-section.hidden {
+  display: none;
+}
+
+.message-card {
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 2rem;
+  /* Dark semi-transparent background */
+  background: rgba(31, 41, 55, 0.8);
+  backdrop-filter: blur(10px);
+  /* Pink border for dark theme */
+  border: 2px solid rgba(244, 114, 182, 0.3);
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.heart-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.message-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  /* Bright pink for dark theme */
+  color: #f472b6;
+}
+
+.message-text {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  /* Light text for dark theme */
+  color: #e5e7eb;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.message-footer {
+  /* Light gray for dark theme */
+  color: #d1d5db;
+  font-size: 0.875rem;
+}
+
+/* Music section */
+.music-section {
+  text-align: center;
+}
+
+.music-card {
+  max-width: 24rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+  /* Dark background for music card */
+  background: rgba(55, 65, 81, 0.3);
+  /* Light border for dark theme */
+  border: 2px dashed #6b7280;
+  border-radius: 0.5rem;
+}
+
+.music-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.music-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  /* Light text for dark theme */
+  color: #f3f4f6;
+}
+
+.music-description {
+  font-size: 0.875rem;
+  /* Light gray for dark theme */
+  color: #d1d5db;
+  margin-bottom: 1rem;
+}
+
+.music-button {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  /* Light border for dark theme */
+  border: 1px solid #6b7280;
+  border-radius: 0.375rem;
+  /* Light text for dark theme */
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.music-button:hover {
+  /* Dark hover background */
+  background: #374151;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  /* Light gray for dark theme */
+  color: #d1d5db;
+}
+
+.footer p {
+  font-size: 0.875rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 3rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .gifts-grid {
+    gap: 1rem;
+  }
+
+  .cake {
+    width: 10rem;
+    height: 6rem;
+  }
+
+  .message-card {
+    margin: 0 1rem;
+    padding: 1.5rem;
+  }
+
+  .message-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+
+  .gift-card {
+    height: 6rem;
+  }
+
+  .gift-emoji {
+    font-size: 2rem;
+  }
+
+  .gift-message {
+    font-size: 0.7rem;
+  }
+}
